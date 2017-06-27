@@ -47,7 +47,8 @@ function determineCommand($command) {
       echo 'No support for PvP rank yet.';
       break;
     case 'server':
-      echo 'No support for server yet.';
+      echo getServerName(getServerID());
+      //echo 'No support for server yet.';
       break;
   }
 }
@@ -59,6 +60,24 @@ function getWvWRank() {
   $json = json_decode($request->getBody());
 
   return $json->wvw_rank;
+}
+
+function getServerName($serverId) {
+  global $gw2api_client;
+
+  $request = $gw2api_client->get('worlds/'.$serverId);
+  $json = json_decode($request->getBody());
+
+  return $json->name;
+} 
+
+function getServerID() {
+  global $gw2api_client;
+
+  $request = $gw2api_client->get('account'.generateAccessTokenString());
+  $json = json_decode($request->getBody());
+
+  return $json->world;
 }
 
 function hasAccessToken() {
