@@ -15,22 +15,4 @@ $app->get('/', function () use ($app) {
     return view('frontpage');
 });
 
-// WvW Rank
-$app->get('/command/wvw/{access_token}', function ($access_token) use ($app) {
-    return 'WvW '.$access_token;
-});
-
-// PvE Mastery
-$app->get('/command/pve/{access_token}', function ($access_token) use ($app) {
-    return 'No support for PvE Masteries yet.';
-});
-
-// PvP Rank
-$app->get('/command/pvp/{access_token}', function ($access_token) use ($app) {
-    return 'No support for PvP rank yet.';
-});
-
-// Server
-$app->get('/command/server/{access_token}', function ($access_token) use ($app) {
-    return 'No support for server yet.';
-});
+$app->get('/command/{type}/{access_token}', ['uses' => 'CommandController@runCommand']);
