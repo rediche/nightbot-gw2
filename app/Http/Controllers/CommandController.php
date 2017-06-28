@@ -49,7 +49,7 @@ class CommandController extends Controller
         break;
 
       case 'server':
-        return 'No support for server yet.';
+        return $this->getServerName($this->getServerID());
         break;
 
       default:
@@ -88,6 +88,21 @@ class CommandController extends Controller
     $json = json_decode($request->getBody());
 
     return $json->wvw_rank;
+  }
+
+  // This could be rewritten to return worlds?ids=all and then traverse the array to minimize API calls
+  function getServerName($serverId) {
+    $request = $this->gw2api_client->get('worlds/' . $serverId);
+    $json = json_decode($request->getBody());
+
+    return $json->name;
+  } 
+
+  function getServerID() {
+    $request = $this->gw2api_client->get('account' . $this->generateAccessTokenString());
+    $json = json_decode($request->getBody());
+
+    return $json->world;
   }
 
 }
