@@ -1,2 +1,5 @@
-vendor
-/.well-known
+/vendor
+/.idea
+Homestead.json
+Homestead.yaml
+.env
