@@ -31,28 +31,45 @@ class CommandController extends Controller
     }
 
     switch ($type) {
-      case 'wvw':
-        return $this->api->getWvWRank($access_token);
-        break;
 
-      case 'pve':
-        return 'No support for PvE Masteries yet.';
-        break;
-
-      case 'pvp':
-        return 'No support for PvP rank yet.';
-        break;
-
-      case 'server':
-        return $this->api->getServerName($this->api->getServerID($access_token));
-        break;
-
+      /**
+       * Account Commands
+       */
       case 'account-name':
         return $this->api->getAccountName($access_token);
         break;
 
-      case 'age':
+      case 'account-server':
+        return $this->api->getServerName($this->api->getServerID($access_token));
+        break;
+
+      case 'account-age':
         return $this->api->getAccountAge($access_token);
+        break;
+
+      /**
+       * WvW Commands
+       */
+      case 'wvw-rank':
+        return $this->api->getWvWRank($access_token);
+        break;
+
+      /**
+       * PvP Commands
+       */
+      case 'pvp-rank':
+        return 'No support for PvP rank yet.';
+        break;
+
+      case 'pvp-rating':
+        return 'No support for PvP rating yet.';
+        break;
+
+      /**
+       * PvE Commands
+       */
+      case 'pve-masteries':
+        return 'No support for PvE Masteries yet.';
         break;
 
       default:
