@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use GuzzleHttp\Client;
+use App\Http\Controllers\ApiController;
 
 class CommandController extends Controller
 {
@@ -11,13 +11,8 @@ class CommandController extends Controller
     *
     * @return void
     */
-  public function __construct()
-  {
-      // Make a new API client for requests
-      $this->gw2api_client = new Client([
-        'base_uri' => 'https://api.guildwars2.com/v2/',
-        'http_errors' => false
-      ]);
+  public function __construct() {
+    $this->api = new ApiController();
   }
 
   /**
@@ -29,15 +24,15 @@ class CommandController extends Controller
     * @return String
     */
   public function runCommand($type, $access_token) {
-    $this->access_token = $access_token;
+    //$this->access_token = $access_token;
 
-    if (!$this->hasValidAccessToken()) {
+    if (!$this->api->hasValidAccessToken($access_token)) {
       return 'Please enter a valid access token.';
     }
 
     switch ($type) {
       case 'wvw':
-        return $this->getWvWRank();
+        return $this->api->getWvWRank($access_token);
         break;
 
       case 'pve':
@@ -49,7 +44,11 @@ class CommandController extends Controller
         break;
 
       case 'server':
-        return $this->getServerName($this->getServerID());
+        return $this->api->getServerName($this->api->getServerID($access_token));
+        break;
+
+      case 'account-name':
+        return $this->api->getAccountName($access_token);
         break;
 
       default:
@@ -57,52 +56,6 @@ class CommandController extends Controller
         break;
     }
 
-  }
-
-  /**
-    * Verify access token
-    */
-  public function hasValidAccessToken() {
-    $request = $this->gw2api_client->get('tokeninfo' . $this->generateAccessTokenString());
-
-    if ($request->getStatusCode() == 200) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  /**
-   * Generate access token string
-   *
-   * @param String $access_token
-   *
-   * @return String
-   */
-  public function generateAccessTokenString() {
-    return '?access_token=' . $this->access_token;
-  }
-
-  public function getWvWRank() {
-    $request = $this->gw2api_client->get('account' . $this->generateAccessTokenString());
-    $json = json_decode($request->getBody());
-
-    return $json->wvw_rank;
-  }
-
-  // This could be rewritten to return worlds?ids=all and then traverse the array to minimize API calls
-  function getServerName($serverId) {
-    $request = $this->gw2api_client->get('worlds/' . $serverId);
-    $json = json_decode($request->getBody());
-
-    return $json->name;
-  } 
-
-  function getServerID() {
-    $request = $this->gw2api_client->get('account' . $this->generateAccessTokenString());
-    $json = json_decode($request->getBody());
-
-    return $json->world;
   }
 
 }
