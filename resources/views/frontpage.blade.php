@@ -8,5 +8,6 @@
   </head>
   <body>
     <h1>GW2 for Nightbot</h1>
+    <p>Create easy GW2 commands for nightbot with GW2 for Nightbot.</p>
   </body>
 </html>
