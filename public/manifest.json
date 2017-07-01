@@ -1,0 +1,6 @@
+{
+  "name": "nightbot-gw2",
+  "short_name": "nightbot-gw2",
+  "start_url": "/",
+  "display": "standalone"
+}

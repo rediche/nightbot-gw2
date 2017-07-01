@@ -1,13 +1,20 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <title>GW2 for Nightbot</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--<link href="css/style.css" rel="stylesheet">-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>nightbot-gw2</title>
+    <meta name="description" content="nightbot-gw2 description">
+
+    <!-- See https://goo.gl/OOhYW5 -->
+    <link rel="manifest" href="/manifest.json">
+
+    <script src="/bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+
+    <link rel="import" href="/src/nightbot-gw2-app/nightbot-gw2-app.html">
   </head>
   <body>
-    <h1>GW2 for Nightbot</h1>
-    <p>Create easy GW2 commands for nightbot with GW2 for Nightbot.</p>
+    <nightbot-gw2-app></nightbot-gw2-app>
   </body>
 </html>

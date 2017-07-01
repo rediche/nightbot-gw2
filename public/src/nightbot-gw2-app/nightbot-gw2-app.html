@@ -1,0 +1,28 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="nightbot-gw2-app">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h1>GW2 for Nightbot!</h1>
+    
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class NightbotGw2App extends Polymer.Element {
+      static get is() { return 'nightbot-gw2-app'; }
+      static get properties() {
+        return {};
+      }
+    }
+
+    window.customElements.define(NightbotGw2App.is, NightbotGw2App);
+  </script>
+</dom-module>
