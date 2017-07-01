@@ -14,7 +14,7 @@ NOTE: This project is **not** production ready yet. *All* the code is subject to
 - [x] Account Server (account-server)
 
 ### WvW
-- [x] WvW Rank (wvw)
+- [x] WvW Rank (wvw-rank)
 - [ ] WvW kills (wvw-kills)
 
 ### PvP
