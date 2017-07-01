@@ -1,13 +1,60 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 
+<link rel="import" href="../../bower_components/paper-styles/typography.html">
+<link rel="import" href="../../bower_components/paper-styles/shadow.html">
+
 <dom-module id="nightbot-gw2-app">
   <template>
     <style>
       :host {
         display: block;
       }
+
+      header {
+        min-height: 300px;
+        background-color: #EC644B;
+        padding: 1rem;
+        text-align: center;
+        @apply --paper-font-subhead;
+        line-height: 1;
+      }
+
+      .bounds {
+        margin-left: 1rem;
+        margin-right: 1rem;
+      }
+
+      .card {
+        background-color: #ffffff;
+        box-sizing: border-box;
+        border-radius: 2px;
+        padding: 1rem;
+        max-width: 40rem;
+        min-height: 10rem;
+        margin-top: -4rem;
+        @apply --shadow-elevation-2dp;
+      }
+
+      @media screen and (min-width: 42rem) {
+        .bounds {
+          margin-left: auto;
+          margin-right: auto;
+        }
+        .card {
+          margin-top: -4rem;
+        }
+      }
     </style>
-    <h1>GW2 for Nightbot!</h1>
+    
+    <header>
+      <div class="bounds">
+        <h1>GW2 Commands for Nightbot</h1>
+      </div>
+    </header>
+
+    <div class="card bounds">
+      <p>Some text</p>
+    </div>
     
   </template>
 
