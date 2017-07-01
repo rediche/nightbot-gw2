@@ -18,8 +18,8 @@ NOTE: This project is **not** production ready yet. *All* the code is subject to
 - [ ] WvW kills (wvw-kills)
 
 ### PvP
-- [ ] PvP Rank (pvp)
+- [ ] PvP Rank (pvp-rank)
 - [ ] PvP Rating (pvp-rating)
 
 ### PvE
-- [ ] PvE Mastery Rank (pve)
+- [ ] PvE Masteries (pve-masteries)
