@@ -44,14 +44,34 @@ class ApiController extends Controller
     return '?access_token=' . $access_token;
   }
 
+  /**
+   * API ENDPOINTS 
+   */
+
+  // v2/account
   public function getAccountEndpoint($access_token) {
     $request = $this->gw2api_client->get('account' . $this->generateAccessTokenString($access_token));
     return json_decode($request->getBody());
   }
 
+  // v2/pvp/stats
+  public function getPvpStatsEndpoint($access_token) {
+    $request = $this->gw2api_client->get('pvp/stats' . $this->generateAccessTokenString($access_token));
+    return json_decode($request->getBody());
+  }
+
+  /**
+   * COMMANDS
+   */
   public function getWvWRank($access_token) {
     $account_data = $this->getAccountEndpoint($access_token);
     return $account_data->wvw_rank;
+  }
+
+  // PvP Rank + rollovers
+  public function getPvPRank($access_token) {
+    $pvp_data = $this->getPvpStatsEndpoint($access_token);
+    return $pvp_data->pvp_rank + $pvp_data->pvp_rank_rollovers;
   }
 
   // This could be rewritten to return worlds?ids=all and then traverse the array to minimize API calls

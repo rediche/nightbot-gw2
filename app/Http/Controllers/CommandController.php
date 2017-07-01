@@ -58,7 +58,7 @@ class CommandController extends Controller
        * PvP Commands
        */
       case 'pvp-rank':
-        return 'No support for PvP rank yet.';
+        return $this->api->getPvPRank($access_token);
         break;
 
       case 'pvp-rating':
