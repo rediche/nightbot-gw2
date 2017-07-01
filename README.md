@@ -18,7 +18,7 @@ NOTE: This project is **not** production ready yet. *All* the code is subject to
 - [ ] WvW kills (wvw-kills)
 
 ### PvP
-- [ ] PvP Rank (pvp-rank)
+- [x] PvP Rank (pvp-rank)
 - [ ] PvP Rating (pvp-rating)
 
 ### PvE
