@@ -51,6 +51,10 @@ class CommandController extends Controller
         return $this->api->getAccountName($access_token);
         break;
 
+      case 'age':
+        return $this->api->getAccountAge($access_token);
+        break;
+
       default:
         return 'This command does not exist.';
         break;

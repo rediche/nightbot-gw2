@@ -71,4 +71,22 @@ class ApiController extends Controller
     $account_data = $this->getAccountEndpoint($access_token);
     return $account_data->name;
   }
+
+  /**
+   * Get account age.
+   * Converts from seconds to days & hours.
+   *
+   * @param String $access_token
+   *
+   * @return String
+   */
+  function getAccountAge($access_token) {
+    $account_data = $this->getAccountEndpoint($access_token);
+
+    // From: https://stackoverflow.com/questions/8273804/convert-seconds-into-days-hours-minutes-and-seconds
+    $dtF = new \DateTime('@0');
+    $dtT = new \DateTime("@$account_data->age");
+
+    return $dtF->diff($dtT)->format('%a days, %h hours'); // ", %i minutes and %s seconds" to add minutes and seconds
+  }
 }
