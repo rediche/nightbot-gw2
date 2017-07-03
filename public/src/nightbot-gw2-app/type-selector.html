@@ -3,6 +3,7 @@
 <link rel="import" href="../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
 <link rel="import" href="../../bower_components/paper-listbox/paper-listbox.html">
 <link rel="import" href="../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item-body.html">
 
 <!-- For paper-dropdown-menu to work. -->
 <link rel="import" href="../../bower_components/neon-animation/web-animations.html">
@@ -34,7 +35,12 @@
         <paper-item name="account">Account</paper-item>
         <paper-item name="pve">PvE</paper-item>
         <paper-item name="pvp">PvP</paper-item>
-        <!--<paper-item name="tp">Trading Post</paper-item>-->
+        <paper-item name="tp" disabled>
+          <paper-item-body two-line>
+            <div>Trading Post</div>
+            <div secondary>Not yet implemented.</div>
+          </paper-item-body>
+        </paper-item>
         <paper-item name="wvw">WvW</paper-item>
       </paper-listbox>
     </paper-dropdown-menu>

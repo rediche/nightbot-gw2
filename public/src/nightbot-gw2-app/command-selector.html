@@ -3,6 +3,7 @@
 <link rel="import" href="../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
 <link rel="import" href="../../bower_components/paper-listbox/paper-listbox.html">
 <link rel="import" href="../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item-body.html">
 
 <link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
 
@@ -26,7 +27,7 @@
       }
 
       paper-item {
-        min-width: 200px;
+        width: 200px;
         max-width: 100%;
       }
     </style>
@@ -44,8 +45,18 @@
       <!-- PVE -->
       <paper-dropdown-menu type="pve" label="Command">
         <paper-listbox slot="dropdown-content" attr-for-selected="name" selected="{{ selectedCommand }}">
-          <paper-item name="masteries" disabled>Masteries</paper-item>
-          <paper-item name="fractal" disabled>Fractal Level</paper-item>
+          <paper-item name="masteries" disabled>
+            <paper-item-body two-line>
+              <div>Masteries</div>
+              <div secondary>Not yet implemented.</div>
+            </paper-item-body>
+          </paper-item>
+          <paper-item name="fractal" disabled>
+            <paper-item-body two-line>
+              <div>Fractal Level</div>
+              <div secondary>Not yet implemented.</div>
+            </paper-item-body>
+          </paper-item>
         </paper-listbox>
       </paper-dropdown-menu>
 
@@ -53,7 +64,12 @@
       <paper-dropdown-menu type="pvp" label="Command">
         <paper-listbox slot="dropdown-content" attr-for-selected="name" selected="{{ selectedCommand }}">
           <paper-item name="rank">Rank</paper-item>
-          <paper-item name="rating" disabled>Rating</paper-item>
+          <paper-item name="rating" disabled>
+            <paper-item-body two-line>
+              <div>Rating</div>
+              <div secondary>Not yet implemented.</div>
+            </paper-item-body>
+          </paper-item>
         </paper-listbox>
       </paper-dropdown-menu>
 
@@ -69,7 +85,12 @@
       <paper-dropdown-menu type="wvw" label="Command">
         <paper-listbox slot="dropdown-content" attr-for-selected="name" selected="{{ selectedCommand }}">
           <paper-item name="rank">Rank</paper-item>
-          <paper-item name="kills" disabled>Kills</paper-item>
+          <paper-item name="kills" disabled>
+            <paper-item-body two-line>
+              <div>Kills</div>
+              <div secondary>Not yet implemented.</div>
+            </paper-item-body>
+          </paper-item>
         </paper-listbox>
       </paper-dropdown-menu>
 
