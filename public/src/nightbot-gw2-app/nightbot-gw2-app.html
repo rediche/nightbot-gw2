@@ -16,12 +16,29 @@
       }
 
       header {
-        min-height: 300px;
-        background-color: #EC644B;
+        background-image: url(../../images/dr-header-img.jpg);
+        background-size: cover;
+        background-position: top center;
+        min-height: 18rem;
         padding: 1rem;
         text-align: center;
         @apply --paper-font-subhead;
+      }
+
+      header h1 {
+        margin-top: 8rem;
         line-height: 1;
+        color: white;
+        text-shadow: 1px 1px 0px rgba(0,0,0,.3);
+      }
+
+      header h1 .logo {
+        display: block;
+        max-width: 10rem;
+        height: auto;
+        margin: 0 auto .5rem;
+        -webkit-filter: drop-shadow(1px 1px 0px rgba(0,0,0,.3));
+        filter: drop-shadow(1px 1px 0px rgba(0,0,0,.3));
       }
 
       .bounds {
@@ -77,6 +94,9 @@
           margin-left: auto;
           margin-right: auto;
         }
+        header h1 {
+          margin-top: 10rem;
+        }
         .card {
           margin-top: -4rem;
         }
@@ -85,7 +105,7 @@
     
     <header>
       <div class="bounds">
-        <h1>GW2 Commands for Nightbot</h1>
+        <h1><img src="../../images/gw2-logo.png" class="logo" alt="Guild Wars 2">Commands for Nightbot</h1>
       </div>
     </header>
 

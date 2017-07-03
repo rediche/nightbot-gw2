@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <title>GW2 for Nightbot</title>
+    <title>Guild Wars 2 Commands for Nightbot</title>
     <meta name="description" content="Guild Wars 2 custom commands for Nightbot.">
 
     <!-- See https://goo.gl/OOhYW5 -->
@@ -18,6 +18,7 @@
       body {
         padding: 0;
         margin: 0;
+        background-color: #fefefe;
       }
     </style>
   </head>
