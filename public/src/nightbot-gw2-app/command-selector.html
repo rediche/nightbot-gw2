@@ -1,0 +1,114 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+
+<!-- For paper-dropdown-menu to work. -->
+<link rel="import" href="../../bower_components/neon-animation/web-animations.html">
+
+<!--
+`<command-selector>`
+
+@element Command Selector
+-->
+<dom-module id="command-selector">
+  <template>
+    <style>
+      :host {
+        display: block
+      }
+
+      iron-pages, paper-dropdown-menu {
+        width: 100%;
+      }
+    </style>
+
+    <iron-pages attr-for-selected="type" selected="[[ selectedType ]]" fallback-selection="fallback">
+      <!-- ACCOUNT -->
+      <paper-dropdown-menu type="account" label="Command">
+        <paper-listbox slot="dropdown-content" attr-for-selected="name" selected="{{ selectedCommand }}">
+          <paper-item name="age">Age</paper-item>
+          <paper-item name="name">Name</paper-item>
+          <paper-item name="server">Server</paper-item>
+        </paper-listbox>
+      </paper-dropdown-menu>
+
+      <!-- PVE -->
+      <paper-dropdown-menu type="pve" label="Command">
+        <paper-listbox slot="dropdown-content" attr-for-selected="name" selected="{{ selectedCommand }}">
+          <paper-item name="masteries" disabled>Masteries</paper-item>
+          <paper-item name="fractal" disabled>Fractal Level</paper-item>
+        </paper-listbox>
+      </paper-dropdown-menu>
+
+      <!-- PVP -->
+      <paper-dropdown-menu type="pvp" label="Command">
+        <paper-listbox slot="dropdown-content" attr-for-selected="name" selected="{{ selectedCommand }}">
+          <paper-item name="rank">Rank</paper-item>
+          <paper-item name="rating" disabled>Rating</paper-item>
+        </paper-listbox>
+      </paper-dropdown-menu>
+
+      <!-- Trading Post -->
+      <!--<paper-dropdown-menu type="tp" label="Command">
+        <paper-listbox slot="dropdown-content" attr-for-selected="name" selected="{{ selectedCommand }}">
+          <paper-item name="rank">Rank</paper-item>
+          <paper-item name="rating" disabled>Rating</paper-item>
+        </paper-listbox>
+      </paper-dropdown-menu>-->
+
+      <!-- WVW -->
+      <paper-dropdown-menu type="wvw" label="Command">
+        <paper-listbox slot="dropdown-content" attr-for-selected="name" selected="{{ selectedCommand }}">
+          <paper-item name="rank">Rank</paper-item>
+          <paper-item name="kills" disabled>Kills</paper-item>
+        </paper-listbox>
+      </paper-dropdown-menu>
+
+      <!-- FALLBACK -->
+      <paper-dropdown-menu type="fallback" label="Commmand">
+        <paper-listbox slot="dropdown-content" attr-for-selected="name" selected="{{ selectedCommand }}">
+          <paper-item name="select-a-type" disabled>Select a type first</paper-item>
+        </paper-listbox>
+      </paper-dropdown-menu>
+    <iron-pages>
+
+  </template>
+
+  <script>
+    class CommandSelector extends Polymer.Element {
+
+      static get is() { return 'command-selector'; }
+
+      static get properties() {
+        return {
+          selectedCommand: {
+            type: String,
+            notify: true
+          },
+          selectedType: {
+            type: String
+          }
+        };
+      }
+
+      constructor() {
+        super();
+      }
+
+      ready() {
+        super.ready();
+
+        Polymer.RenderStatus.afterNextRender(this, function() {
+          
+        });
+      }
+
+    }
+
+    window.customElements.define(CommandSelector.is, CommandSelector);
+  </script>
+</dom-module>

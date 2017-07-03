@@ -1,0 +1,69 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+
+<!-- For paper-dropdown-menu to work. -->
+<link rel="import" href="../../bower_components/neon-animation/web-animations.html">
+
+<!--
+`<type-selector>`
+
+@element Type Selector
+-->
+<dom-module id="type-selector">
+  <template>
+    <style>
+      :host {
+        display: block
+      }
+
+      paper-dropdown-menu {
+        width: 100%;
+      }
+    </style>
+
+    <paper-dropdown-menu label="Type">
+      <paper-listbox slot="dropdown-content" attr-for-selected="name" selected="{{ selected }}">
+        <paper-item name="account">Account</paper-item>
+        <paper-item name="pve">PvE</paper-item>
+        <paper-item name="pvp">PvP</paper-item>
+        <!--<paper-item name="tp">Trading Post</paper-item>-->
+        <paper-item name="wvw">WvW</paper-item>
+      </paper-listbox>
+    </paper-dropdown-menu>
+
+  </template>
+
+  <script>
+    class TypeSelector extends Polymer.Element {
+
+      static get is() { return 'type-selector'; }
+
+      static get properties() {
+        return {
+          selected: {
+            type: String,
+            notify: true
+          }
+        };
+      }
+
+      constructor() {
+        super();
+      }
+
+      ready() {
+        super.ready();
+
+        Polymer.RenderStatus.afterNextRender(this, function() {
+          
+        });
+      }
+
+    }
+
+    window.customElements.define(TypeSelector.is, TypeSelector);
+  </script>
+</dom-module>

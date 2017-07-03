@@ -3,6 +3,11 @@
 <link rel="import" href="../../bower_components/paper-styles/typography.html">
 <link rel="import" href="../../bower_components/paper-styles/shadow.html">
 
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+
+<link rel="import" href="./type-selector.html">
+<link rel="import" href="./command-selector.html">
+
 <dom-module id="nightbot-gw2-app">
   <template>
     <style>
@@ -20,6 +25,7 @@
       }
 
       .bounds {
+        max-width: 40rem;
         margin-left: 1rem;
         margin-right: 1rem;
       }
@@ -28,11 +34,42 @@
         background-color: #ffffff;
         box-sizing: border-box;
         border-radius: 2px;
-        padding: 1rem;
-        max-width: 40rem;
         min-height: 10rem;
         margin-top: -4rem;
         @apply --shadow-elevation-2dp;
+      }
+
+      .card .inner {
+        padding: 1rem;
+      }
+
+      .horisontal-spacer {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .horisontal-spacer * {
+        flex-basis: calc(50% - .5rem);
+      }
+
+      .card-bottom {
+        border-top: 1px solid #eeeeee;
+      }
+
+      .card-bottom-title {
+        margin-top: 0;
+        text-transform: uppercase;
+        @apply --paper-font-caption;
+      }
+
+      pre {
+        white-space: pre-wrap;
+        margin: 0;
+      }
+
+      .apikey-helper-text {
+        text-align: center;
+        @apply --paper-font-caption;
       }
 
       @media screen and (min-width: 42rem) {
@@ -53,7 +90,28 @@
     </header>
 
     <div class="card bounds">
-      <p>Some text</p>
+      <div class="card-form inner">
+
+        <div class="horisontal-spacer">
+          <type-selector selected="{{ selectedType }}"></type-selector>
+
+          <command-selector 
+            selected-command="{{ selectedCommand }}" 
+            selected-type="[[ selectedType ]]"></command-selector>
+        </div>
+
+        <paper-input label="Guild Wars 2 API Key" value="{{ apiKey }}"></paper-input>
+      </div>
+
+      <div class="card-bottom inner">
+        <p class="card-bottom-title">Copy this</p>
+        <pre hidden$="[[ !settingsCompleted ]]">$(urlfetch https://nightbot.gw2.ninja/command/[[ selectedType ]]-[[ selectedCommand ]]/[[ apiKey ]]);</pre>
+        <pre hidden$="[[ settingsCompleted ]]">Please fill out the form, to get your command.</pre>
+      </div>
+    </div>
+
+    <div class="bounds">
+      <p class="apikey-helper-text">Don't have an API Key? <a href="https://account.arena.net/applications" target="_blank">Make an API Key here</a>.
     </div>
     
   </template>
@@ -66,7 +124,31 @@
     class NightbotGw2App extends Polymer.Element {
       static get is() { return 'nightbot-gw2-app'; }
       static get properties() {
-        return {};
+        return {
+          initialLoad: {
+            type: Boolean,
+            value: true
+          },
+          settingsCompleted: {
+            type: Boolean,
+            computed: '_settingsCompletedObserver(apiKey, selectedType, selectedCommand, initialLoad)'
+          }
+        };
+      }
+
+      _settingsCompletedObserver(key, type, command, initialLoad) {
+
+        // If it's first load, return false because settings hasn't been completed
+        if (initialLoad === true) {
+          this.initialLoad = false;
+          return false;
+        }
+
+        if (key !== undefined && type !== undefined && command !== undefined) {
+          return true;
+        }
+
+        return false;
       }
     }
 
