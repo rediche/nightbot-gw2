@@ -13,6 +13,11 @@ NOTE: This project is **not** production ready yet. *All* the code is subject to
 - [x] Account Age (account-age)
 - [x] Account Server (account-server)
 
+#### Wallet
+
+- [ ] Gold (wallet-gold)
+- [ ] Karma (wallet-karma)
+ 
 ### WvW
 - [x] WvW Rank (wvw-rank)
 - [ ] WvW kills (wvw-kills)
