@@ -54,6 +54,12 @@ class ApiController extends Controller
     return json_decode($request->getBody());
   }
 
+  // v2/account/achievements
+  public function getAccountAchievementsEndpoint($access_token) {
+    $request = $this->gw2api_client->get('account/achievements' . $this->generateAccessTokenString($access_token));
+    return json_decode($request->getBody());
+  }
+
   // v2/pvp/stats
   public function getPvpStatsEndpoint($access_token) {
     $request = $this->gw2api_client->get('pvp/stats' . $this->generateAccessTokenString($access_token));
@@ -66,6 +72,12 @@ class ApiController extends Controller
   public function getWvWRank($access_token) {
     $account_data = $this->getAccountEndpoint($access_token);
     return $account_data->wvw_rank;
+  }
+
+  public function getWvWKills($access_token) {
+    $achievement_data = $this->getAccountAchievementsEndpoint($access_token);
+    $achievement_index = array_search(283, array_column($achievement_data, 'id'));
+    return number_format($achievement_data[$achievement_index]->current, 0, '', '.');
   }
 
   // PvP Rank + rollovers
