@@ -79,6 +79,17 @@ class CommandController extends Controller
       default:
         return 'This command does not exist.';
         break;
+
+      /** 
+       * Wallet
+       */
+      case 'wallet-gold':
+        return $this->api->getWalletGold($access_token);
+        break;
+
+      case 'wallet-karma':
+        return $this->api->getWalletKarma($access_token);
+        break;
     }
 
   }

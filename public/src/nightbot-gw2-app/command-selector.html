@@ -81,6 +81,14 @@
         </paper-listbox>
       </paper-dropdown-menu>-->
 
+      <!-- Wallet -->
+      <paper-dropdown-menu type="wallet" label="Command">
+        <paper-listbox slot="dropdown-content" attr-for-selected="name" selected="{{ selectedCommand }}">
+          <paper-item name="gold">Gold</paper-item>
+          <paper-item name="karma">Karma</paper-item>
+        </paper-listbox>
+      </paper-dropdown-menu>
+
       <!-- WVW -->
       <paper-dropdown-menu type="wvw" label="Command">
         <paper-listbox slot="dropdown-content" attr-for-selected="name" selected="{{ selectedCommand }}">

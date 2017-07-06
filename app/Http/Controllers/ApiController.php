@@ -44,6 +44,15 @@ class ApiController extends Controller
     return '?access_token=' . $access_token;
   }
 
+  // Convert to Gold String
+  public function convertToCoinString($number) {
+    $gold = floor($number / 10000);
+    $silver = sprintf('%02d', floor($number / 100) % 100);
+    $copper = sprintf('%02d', floor($number % 100));
+
+    return $gold.'g '.$silver.'s '.$copper.'c';
+  }
+
   /**
    * API ENDPOINTS 
    */
@@ -57,6 +66,18 @@ class ApiController extends Controller
   // v2/account/achievements
   public function getAccountAchievementsEndpoint($access_token) {
     $request = $this->gw2api_client->get('account/achievements' . $this->generateAccessTokenString($access_token));
+    return json_decode($request->getBody());
+  }
+
+  // v2/account/wallet
+  public function getAccountWalletEndpoint($access_token) {
+    $request = $this->gw2api_client->get('account/wallet' . $this->generateAccessTokenString($access_token));
+    return json_decode($request->getBody());
+  }
+
+  // v2/currencies
+  public function getCurrencies() {
+    $request = $this->gw2api_client->get('currencies?ids=all');
     return json_decode($request->getBody());
   }
 
@@ -102,6 +123,18 @@ class ApiController extends Controller
   function getAccountName($access_token) {
     $account_data = $this->getAccountEndpoint($access_token);
     return $account_data->name;
+  }
+
+  function getWalletGold($access_token) {
+    $wallet_data = $this->getAccountWalletEndpoint($access_token);
+    $currency_index = array_search(1, array_column($wallet_data, 'id'));
+    return $this->convertToCoinString($wallet_data[$currency_index]->value);
+  }
+
+  function getWalletKarma($access_token) {
+    $wallet_data = $this->getAccountWalletEndpoint($access_token);
+    $currency_index = array_search(2, array_column($wallet_data, 'id'));
+    return number_format($wallet_data[$currency_index]->value, 0, '', '.');
   }
 
   /**
