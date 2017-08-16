@@ -27,4 +27,6 @@ NOTE: This project is **not** production ready yet. *All* the code is subject to
 - [ ] PvP Rating (pvp-rating)
 
 ### PvE
-- [ ] PvE Masteries (pve-masteries)
+- [x] PvE Mastery Points (pve-mastery-points)
+- [x] PvE Mastery Points Tyria (pve-mastery-points-tyria)
+- [x] PvE Mastery Points Maguuma (pve-mastery-points-maguuma)

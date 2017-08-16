@@ -45,12 +45,9 @@
       <!-- PVE -->
       <paper-dropdown-menu type="pve" label="Command">
         <paper-listbox slot="dropdown-content" attr-for-selected="name" selected="{{ selectedCommand }}">
-          <paper-item name="masteries" disabled>
-            <paper-item-body two-line>
-              <div>Masteries</div>
-              <div secondary>Not yet implemented.</div>
-            </paper-item-body>
-          </paper-item>
+          <paper-item name="mastery-points">Mastery Points</paper-item>
+          <paper-item name="mastery-points-tyria">Mastery Points (Tyria)</paper-item>
+          <paper-item name="mastery-points-maguuma">Mastery Points (Maguuma)</paper-item>
           <paper-item name="fractal" disabled>
             <paper-item-body two-line>
               <div>Fractal Level</div>
@@ -98,7 +95,7 @@
       </paper-dropdown-menu>
 
       <!-- FALLBACK -->
-      <paper-dropdown-menu type="fallback" label="Commmand">
+      <paper-dropdown-menu type="fallback" label="Command">
         <paper-listbox slot="dropdown-content" attr-for-selected="name" selected="{{ selectedCommand }}">
           <paper-item name="select-a-type" disabled>Select a type first</paper-item>
         </paper-listbox>

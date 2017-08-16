@@ -69,6 +69,12 @@ class ApiController extends Controller
     return json_decode($request->getBody());
   }
 
+  // v2/account/mastery/points
+  public function getAccountMasteryPointsEndpoint($access_token) {
+    $request = $this->gw2api_client->get('account/mastery/points' . $this->generateAccessTokenString($access_token));
+    return json_decode($request->getBody());
+  }
+
   // v2/account/wallet
   public function getAccountWalletEndpoint($access_token) {
     $request = $this->gw2api_client->get('account/wallet' . $this->generateAccessTokenString($access_token));
@@ -153,5 +159,22 @@ class ApiController extends Controller
     $dtT = new \DateTime("@$account_data->age");
 
     return $dtF->diff($dtT)->format('%a days, %h hours'); // ", %i minutes and %s seconds" to add minutes and seconds
+  }
+
+  function getAccountMasteryPoints($access_token, $region = 'all') {
+    $account_mastery_point_data = $this->getAccountMasteryPointsEndpoint($access_token);
+
+    if ($region == 'all') {
+      $total_mastery_points = 0;
+      
+      foreach($account_mastery_point_data->totals as $region) {
+        $total_mastery_points += $region->spent;
+      }
+  
+      return $total_mastery_points;
+    } else {
+      $region_index = array_search(ucfirst($region), array_column($account_mastery_point_data->totals, 'region'));
+      return $account_mastery_point_data->totals[$region_index]->spent;
+    }
   }
 }

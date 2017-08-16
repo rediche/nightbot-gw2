@@ -72,8 +72,16 @@ class CommandController extends Controller
       /**
        * PvE Commands
        */
-      case 'pve-masteries':
-        return 'No support for PvE Masteries yet.';
+      case 'pve-mastery-points':
+        return $this->api->getAccountMasteryPoints($access_token);
+        break;
+
+      case 'pve-mastery-points-tyria':
+        return $this->api->getAccountMasteryPoints($access_token, 'tyria');
+        break;
+
+      case 'pve-mastery-points-maguuma':
+        return $this->api->getAccountMasteryPoints($access_token, 'maguuma');
         break;
 
       default:
