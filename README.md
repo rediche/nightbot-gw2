@@ -15,12 +15,12 @@ NOTE: This project is **not** production ready yet. *All* the code is subject to
 
 #### Wallet
 
-- [ ] Gold (wallet-gold)
-- [ ] Karma (wallet-karma)
+- [x] Gold (wallet-gold)
+- [x] Karma (wallet-karma)
  
 ### WvW
 - [x] WvW Rank (wvw-rank)
-- [ ] WvW kills (wvw-kills)
+- [x] WvW kills (wvw-kills)
 
 ### PvP
 - [x] PvP Rank (pvp-rank)
