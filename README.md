@@ -30,3 +30,4 @@ NOTE: This project is **not** production ready yet. *All* the code is subject to
 - [x] PvE Mastery Points (pve-mastery-points)
 - [x] PvE Mastery Points Tyria (pve-mastery-points-tyria)
 - [x] PvE Mastery Points Maguuma (pve-mastery-points-maguuma)
+- [x] PvE Fractal Level (pve-fractal-level)

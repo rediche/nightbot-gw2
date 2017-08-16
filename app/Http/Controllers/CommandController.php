@@ -84,6 +84,10 @@ class CommandController extends Controller
         return $this->api->getAccountMasteryPoints($access_token, 'maguuma');
         break;
 
+      case 'pve-fractal-level':
+        return $this->api->getAccountFractalLevel($access_token);
+        break;
+
       default:
         return 'This command does not exist.';
         break;

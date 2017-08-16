@@ -131,6 +131,11 @@ class ApiController extends Controller
     return $account_data->name;
   }
 
+  function getAccountFractalLevel($access_token) {
+    $account_data = $this->getAccountEndpoint($access_token);
+    return $account_data->fractal_level;
+  }
+
   function getWalletGold($access_token) {
     $wallet_data = $this->getAccountWalletEndpoint($access_token);
     $currency_index = array_search(1, array_column($wallet_data, 'id'));
