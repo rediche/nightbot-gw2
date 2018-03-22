@@ -18,11 +18,13 @@ NOTE: This project is **not** production ready yet. *All* the code is subject to
 - [x] Gold (wallet-gold)
 - [x] Karma (wallet-karma)
 - [x] Laurels (wallet-laurels)
+- [x] Gems (wallet-gems)
+- [x] Badges of Honor (wallet-badges-of-honor)
  
 ### WvW
 - [x] WvW Rank (wvw-rank)
 - [x] WvW kills (wvw-kills)
-- [ ] Matchup (wvw-matchup)
+- [x] Matchup (wvw-matchup)
 
 ### PvP
 - [x] PvP Rank (pvp-rank)
