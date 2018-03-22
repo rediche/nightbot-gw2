@@ -107,6 +107,10 @@ class CommandController extends Controller
       case 'wallet-laurels':
         return $this->api->getWalletLaurels($access_token);
         break;
+
+      case 'wallet-gems':
+        return $this->api->getWalletGems($access_token);
+        break;
         
       default:
         return 'This command does not exist.';
