@@ -58,6 +58,10 @@ class CommandController extends Controller
         return $this->api->getWvWKills($access_token);
         break;
 
+      case 'wvw-matchup':
+        return $this->api->getWvWMatchup($access_token);
+        break;
+
       /**
        * PvP Commands
        */

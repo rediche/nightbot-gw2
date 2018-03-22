@@ -99,6 +99,19 @@ class ApiController extends Controller
     return json_decode($request->getBody());
   }
 
+  // v2/wvw/matches
+  public function getWvwMatches($ids = []) {
+    $idsString = implode (",", $ids);
+
+    if (empty($idsString)) {
+      $request = $this->gw2api_client->get('wvw/matches');
+    } else {
+      $request = $this->gw2api_client->get("wvw/matches?ids=$idsString");
+    }
+
+    return json_decode($request->getBody());
+  }
+
   /**
    * COMMANDS
    */
@@ -127,9 +140,94 @@ class ApiController extends Controller
     return $json->name;
   } 
 
+  function getServerNames($ids) {
+    $idsString = implode(',', $ids);
+    $request = $this->gw2api_client->get("worlds?ids=$idsString");
+    $json = json_decode($request->getBody());
+
+    return $json;
+  }
+
   function getServerID($access_token) {
     $account_data = $this->getAccountEndpoint($access_token);
     return $account_data->world;
+  }
+
+  function getWvWMatchup($access_token) {
+    $serverId = $this->getServerID($access_token);
+    $region = $serverId > 2000 ? 2 : 1; // 2 = EU, 1 = NA
+    $wvwMatches = $this->getWvwMatches();
+
+    $regionalMatches = [];
+    foreach ($wvwMatches as $match) {
+    /*   echo "$match\n";
+      echo strpos($match, "$region")."\n"; */
+      if (strpos($match, "$region") === 0) { // Typecast to string, otherwise strpos doesn't work.
+          $regionalMatches[] = $match;
+      }
+    }
+    $regionalMatchesData = $this->getWvwMatches($regionalMatches);
+    foreach ($regionalMatchesData as $index => $matchup) {
+      if (in_array($serverId, $matchup->all_worlds->blue) || 
+          in_array($serverId, $matchup->all_worlds->red) || 
+          in_array($serverId, $matchup->all_worlds->green)) {
+        $foundMatchup = $regionalMatchesData[$index];
+      }
+    }
+
+    $allWorldIdsInMatchup = array_merge($foundMatchup->all_worlds->red, $foundMatchup->all_worlds->blue, $foundMatchup->all_worlds->green);
+
+    $allWorldsInMatchup = $this->getServerNames($allWorldIdsInMatchup);
+
+    $red = $this->createWorldLinkObject('red', $allWorldsInMatchup, $foundMatchup);
+    $blue = $this->createWorldLinkObject('blue', $allWorldsInMatchup, $foundMatchup);
+    $green = $this->createWorldLinkObject('green', $allWorldsInMatchup, $foundMatchup);
+
+    $output = $this->createWorldLinkString($red) . ' vs. ';
+    $output .= $this->createWorldLinkString($blue) . ' vs. ';
+    $output .= $this->createWorldLinkString($green);
+
+    return $output;
+  }
+
+  function createWorldLinkString($worldObj) {
+    $output = '';
+    $output .= "{$worldObj->hosting->name} ";
+
+    if (count($worldObj->linked) > 0) {
+      $output .= '(';
+
+      foreach ($worldObj->linked as $index => $link) {
+        $output .= "$link->name";
+        if (count($worldObj->linked) != $index + 1) {
+          $output .= ', ';
+        }
+      }
+
+      $output .= ')';
+    }
+
+    return $output;
+  }
+
+  function createWorldLinkObject($color, $worldIds, $matchup) {
+    $matchup = json_decode(json_encode($matchup), true);
+    $obj = json_decode('{}');
+    $obj->linked = [];
+
+    foreach ($worldIds as $world) {
+      if (!in_array($world->id, $matchup['all_worlds'][$color])) {
+        continue;
+      }
+      
+      if ($world->id == $matchup['worlds'][$color]) {
+        $obj->hosting = $world;
+      } else {
+        $obj->linked[] = $world;
+      }
+    }
+
+    return $obj;
   }
 
   function getAccountName($access_token) {
