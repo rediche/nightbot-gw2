@@ -53,6 +53,12 @@ class ApiController extends Controller
     return $gold.'g '.$silver.'s '.$copper.'c';
   }
 
+  public function getAccountCurrencyValue($currencyId, $access_token) {
+    $wallet_data = $this->getAccountWalletEndpoint($access_token);
+    $currency_index = array_search($currencyId, array_column($wallet_data, 'id'));
+    return $wallet_data[$currency_index]->value;
+  }
+
   /**
    * API ENDPOINTS 
    */
@@ -137,21 +143,15 @@ class ApiController extends Controller
   }
 
   function getWalletGold($access_token) {
-    $wallet_data = $this->getAccountWalletEndpoint($access_token);
-    $currency_index = array_search(1, array_column($wallet_data, 'id'));
-    return $this->convertToCoinString($wallet_data[$currency_index]->value);
+    return $this->convertToCoinString($this->getAccountCurrencyValue(1, $access_token));
   }
 
   function getWalletKarma($access_token) {
-    $wallet_data = $this->getAccountWalletEndpoint($access_token);
-    $currency_index = array_search(2, array_column($wallet_data, 'id'));
-    return number_format($wallet_data[$currency_index]->value, 0, '', '.');
+    return number_format($this->getAccountCurrencyValue(2, $access_token), 0, '', '.');
   }
 
   function getWalletLaurels($access_token) {
-    $wallet_data = $this->getAccountWalletEndpoint($access_token);
-    $currency_index = array_search(3, array_column($wallet_data, 'id'));
-    return number_format($wallet_data[$currency_index]->value, 0, '', '.');
+    return number_format($this->getAccountCurrencyValue(3, $access_token), 0, '', '.');
   }
 
   /**
