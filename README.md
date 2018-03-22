@@ -21,6 +21,7 @@ NOTE: This project is **not** production ready yet. *All* the code is subject to
 ### WvW
 - [x] WvW Rank (wvw-rank)
 - [x] WvW kills (wvw-kills)
+- [ ] Matchup (wvw-matchup)
 
 ### PvP
 - [x] PvP Rank (pvp-rank)
