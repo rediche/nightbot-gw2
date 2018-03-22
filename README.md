@@ -17,6 +17,7 @@ NOTE: This project is **not** production ready yet. *All* the code is subject to
 
 - [x] Gold (wallet-gold)
 - [x] Karma (wallet-karma)
+- [x] Laurels (wallet-laurels)
  
 ### WvW
 - [x] WvW Rank (wvw-rank)

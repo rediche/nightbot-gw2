@@ -88,19 +88,24 @@ class CommandController extends Controller
         return $this->api->getAccountFractalLevel($access_token);
         break;
 
-      default:
-        return 'This command does not exist.';
-        break;
-
-      /** 
-       * Wallet
-       */
+        
+        /** 
+         * Wallet
+         */
       case 'wallet-gold':
         return $this->api->getWalletGold($access_token);
         break;
-
+        
       case 'wallet-karma':
         return $this->api->getWalletKarma($access_token);
+        break;
+        
+      case 'wallet-laurels':
+        return $this->api->getWalletLaurels($access_token);
+        break;
+        
+      default:
+        return 'This command does not exist.';
         break;
     }
 

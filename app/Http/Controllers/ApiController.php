@@ -148,6 +148,12 @@ class ApiController extends Controller
     return number_format($wallet_data[$currency_index]->value, 0, '', '.');
   }
 
+  function getWalletLaurels($access_token) {
+    $wallet_data = $this->getAccountWalletEndpoint($access_token);
+    $currency_index = array_search(3, array_column($wallet_data, 'id'));
+    return number_format($wallet_data[$currency_index]->value, 0, '', '.');
+  }
+
   /**
    * Get account age.
    * Converts from seconds to days & hours.
