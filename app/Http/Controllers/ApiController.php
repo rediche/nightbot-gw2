@@ -160,8 +160,6 @@ class ApiController extends Controller
 
     $regionalMatches = [];
     foreach ($wvwMatches as $match) {
-    /*   echo "$match\n";
-      echo strpos($match, "$region")."\n"; */
       if (strpos($match, "$region") === 0) { // Typecast to string, otherwise strpos doesn't work.
           $regionalMatches[] = $match;
       }
