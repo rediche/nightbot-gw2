@@ -4,6 +4,9 @@
 <link rel="import" href="../../bower_components/paper-styles/shadow.html">
 
 <link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-radio-group/paper-radio-group.html">
+<link rel="import" href="../../bower_components/paper-radio-button/paper-radio-button.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
 
 <link rel="import" href="./type-selector.html">
 <link rel="import" href="./command-selector.html">
@@ -89,6 +92,18 @@
         @apply --paper-font-caption;
       }
 
+      label {
+        @apply --paper-font-body1;
+      }
+
+      paper-radio-group {
+        margin-top: .25rem;
+      }
+
+      iron-pages[hidden] {
+        display: none;
+      }
+
       @media screen and (min-width: 42rem) {
         .bounds {
           margin-left: auto;
@@ -121,11 +136,20 @@
         </div>
 
         <paper-input label="Guild Wars 2 API Key" value="{{ apiKey }}"></paper-input>
+
+        <label id="chatbot-label">Chatbot:</label>
+        <paper-radio-group aria-labelledby="chatbot-label" selected="{{chatbotSelected}}">
+          <paper-radio-button name="streamlabs-chatbot">Streamlabs Chatbot</paper-radio-button>
+          <paper-radio-button name="nightbot">Nightbot</paper-radio-button>
+        </paper-radio-group>
       </div>
 
       <div class="card-bottom inner">
         <p class="card-bottom-title">Copy this</p>
-        <pre hidden$="[[ !settingsCompleted ]]">$(urlfetch https://nightbot.gw2.ninja/command/[[ selectedType ]]-[[ selectedCommand ]]/[[ apiKey ]])</pre>
+        <iron-pages attr-for-selected="name" selected="{{chatbotSelected}}"  hidden$="[[ !settingsCompleted ]]">
+          <pre name="nightbot">$(urlfetch https://nightbot.gw2.ninja/command/[[ selectedType ]]-[[ selectedCommand ]]/[[ apiKey ]])</pre>
+          <pre name="streamlabs-chatbot">$readapi(https://nightbot.gw2.ninja/command/[[ selectedType ]]-[[ selectedCommand ]]/[[ apiKey ]])</pre>
+        </iron-pages>
         <pre hidden$="[[ settingsCompleted ]]">Please fill out the form, to get your command.</pre>
       </div>
     </div>
@@ -152,6 +176,10 @@
           settingsCompleted: {
             type: Boolean,
             computed: '_settingsCompletedObserver(apiKey, selectedType, selectedCommand, initialLoad)'
+          },
+          chatbotSelected: {
+            type: String,
+            value: "streamlabs-chatbot"
           }
         };
       }
