@@ -112,6 +112,10 @@ class CommandController extends Controller
         return $this->api->getWalletGems($access_token);
         break;
         
+      case 'wallet-badges-of-honor':
+        return $this->api->getWalletBadgesOfHonor($access_token);
+        break;
+
       default:
         return 'This command does not exist.';
         break;

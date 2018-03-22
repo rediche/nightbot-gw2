@@ -264,6 +264,10 @@ class ApiController extends Controller
     return number_format($this->getAccountCurrencyValue(4, $access_token), 0, '', '.');
   }
 
+  function getWalletBadgesOfHonor($access_token) {
+    return number_format($this->getAccountCurrencyValue(15, $access_token), 0, '', '.');
+  }
+
   /**
    * Get account age.
    * Converts from seconds to days & hours.
