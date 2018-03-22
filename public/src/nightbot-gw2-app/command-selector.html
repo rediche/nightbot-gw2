@@ -36,7 +36,12 @@
       <!-- ACCOUNT -->
       <paper-dropdown-menu type="account" label="[[commandLabel]]">
         <paper-listbox slot="dropdown-content" attr-for-selected="name" selected="{{ selectedCommand }}">
-          <paper-item name="age">Age</paper-item>
+          <paper-item name="age" disabled>
+            <paper-item-body two-line>
+              <div>Age</div>
+              <div secondary>Not yet implemented.</div>
+            </paper-item-body>
+          </paper-item>
           <paper-item name="name">Name</paper-item>
           <paper-item name="server">Server</paper-item>
         </paper-listbox>
