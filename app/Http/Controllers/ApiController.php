@@ -166,6 +166,7 @@ class ApiController extends Controller
           $regionalMatches[] = $match;
       }
     }
+
     $regionalMatchesData = $this->getWvwMatches($regionalMatches);
     foreach ($regionalMatchesData as $index => $matchup) {
       if (in_array($serverId, $matchup->all_worlds->blue) || 
@@ -190,6 +191,10 @@ class ApiController extends Controller
     return $output;
   }
 
+  function calculateWorldKDR($kills, $deaths) {
+    return round($kills / $deaths, 1);
+  }
+
   function createWorldLinkString($worldObj) {
     $output = '';
     $output .= "{$worldObj->hosting->name} ";
@@ -207,6 +212,8 @@ class ApiController extends Controller
       $output .= ')';
     }
 
+    $output .= ' ['.$this->calculateWorldKDR($worldObj->kills, $worldObj->deaths).']';
+
     return $output;
   }
 
@@ -214,6 +221,9 @@ class ApiController extends Controller
     $matchup = json_decode(json_encode($matchup), true);
     $obj = json_decode('{}');
     $obj->linked = [];
+
+    $obj->kills = $matchup['kills'][$color];
+    $obj->deaths = $matchup['deaths'][$color];
 
     foreach ($worldIds as $world) {
       if (!in_array($world->id, $matchup['all_worlds'][$color])) {
