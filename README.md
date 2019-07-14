@@ -1,4 +1,7 @@
 # nightbot-gw2
+
+## DEPRECATED IN FAVOR OF: https://github.com/rediche/gw2-stream
+
 Guild Wars 2 commands for nightbot.
 
 When this project gets closer to production ready, I will be hosting a version of this on [http://gw2.ninja](GW2.Ninja) for everyone to use.
